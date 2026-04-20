@@ -95,3 +95,65 @@ function scrollToTopWithAnimation() {
 
   requestAnimationFrame(animation);
 }
+
+// 微信公众号二维码弹窗
+(function() {
+  var modal = document.getElementById('wechat-modal');
+  var closeBtn = document.getElementById('wechat-modal-close');
+  var wechatBtn = document.querySelector('.wechat-btn');
+  var hoverTimer = null;
+
+  function showModal() {
+    if (modal) modal.classList.add('show');
+  }
+
+  function hideModal() {
+    if (modal) modal.classList.remove('show');
+  }
+
+  // 鼠标悬停"关注"按钮时显示弹窗
+  if (wechatBtn && modal) {
+    wechatBtn.addEventListener('mouseenter', function() {
+      hoverTimer = setTimeout(showModal, 200);
+    });
+
+    wechatBtn.addEventListener('mouseleave', function() {
+      if (hoverTimer) {
+        clearTimeout(hoverTimer);
+        hoverTimer = null;
+      }
+      setTimeout(function() {
+        if (!modal.matches(':hover')) {
+          hideModal();
+        }
+      }, 100);
+    });
+
+    // 鼠标离开弹窗时关闭
+    modal.addEventListener('mouseleave', function() {
+      hideModal();
+    });
+  }
+
+  // 点击按钮打开弹窗
+  if (wechatBtn) {
+    wechatBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      showModal();
+    });
+  }
+
+  // 点击关闭按钮
+  if (closeBtn) {
+    closeBtn.addEventListener('click', hideModal);
+  }
+
+  // 点击弹窗外部关闭
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        hideModal();
+      }
+    });
+  }
+})();
