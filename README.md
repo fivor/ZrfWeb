@@ -2,7 +2,7 @@
 
 一个简约、接近 Apple 设计风格的个人主页模板。
 
-![ZrfWeb 预览](img/ZrfWeb.webp)
+![Web 预览](img/Web.webp)
 
 ## 简介
 
